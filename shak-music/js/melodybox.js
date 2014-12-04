@@ -25,10 +25,10 @@ function mbox() {                           //старт игры, запуск 
     //if (a != a2) {
     audio.src = 'http://guessmelody.com/'+musicArr[a].file;                   //указываем путь к воспроизводиму файлу; путь является одним из свойств выбраного объекта (песни)
     pts = 300;                                           //значение таймера обратно к 15
-    document.getElementById('timer').innerHTML = pts + ' PTS'; //публикуем его
+    document.getElementById('start').innerHTML = pts + ' PTS'; //публикуем его
     audio.play();                                           //запуск аудио  
     timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
-    document.getElementById('start').style.display = 'none';   
+    //document.getElementById('start').style.display = 'none';   
     answerGen();                                            //генерация ответов
     }
             
@@ -39,9 +39,9 @@ function timerGo() {                                                //функц
         //document.getElementById('answers').style.display = 'block';
         timerInterval = setInterval(function() {                    //сам таймер
             pts = pts-4;                                                //отнимаем значение секунд
-            document.getElementById('timer').innerHTML = pts + ' PTS';  // записываем его
+            document.getElementById('start').innerHTML = pts + ' PTS';  // записываем его
             if(pts==0) lose();}, 200);}                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
-    //};
+   // };
 
 
 function mstop() {                                                  //остановка музыки

@@ -38,7 +38,7 @@
 
         <div class="container">
 
-            <div class="row">
+            <div class="row text-center">
                 <div id="recorder" class="col-lg-4 col-md-4 hidden-sm hidden-xs">
                     <img src="img/recorder.png" alt="" style="display:block; width: 100%;">
                     <img src="img/cas1.png" class="rotateimg" style=""/>
@@ -46,20 +46,20 @@
                 </div>
 
                 <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-                    <div class="row">
-                        <div class="col-lg-12 col-lg-offset-4">
-                        <button class="btn btn-success " id="start" onclick="mbox()"><span class="glyphicon glyphicon-play-circle"></span> PLAY</button>
-                        <button class="btn btn-danger" onclick="mstop()"><span class="glyphicon glyphicon-stop"></span> STOP</button>
-                        </div>
-                    </div>
-
                     <div class="row well" style="">
-                        <span class="label label-warning" id="timer">300</span>
-                        <span class="label label-success" id="points">0 total</span>
-                        <span class="label label-danger" id="lifes">3 lifes</span>
+                        <h3 style="margin:0;"><span class="label label-success" id="points">0 total</span>
+                        <span class="label label-danger" id="lifes">3 lifes</span></h3>
+
                     </div>
                      
                     <div class="row well">
+                        <div class="row-fluid">
+                        <div class="col-lg-12 text-center">
+                        <button class="btn btn-success btn-lg" id="start" onclick="mbox()"><span class="glyphicon glyphicon-play-circle"></span> PLAY</button>
+                        <!-- <button class="btn btn-danger" onclick="mstop()"><span class="glyphicon glyphicon-stop"></span> STOP</button> -->
+                        <!-- <div style="display: inline-block;"><h3 style="margin:0;"><span class="label label-warning" id="timer">300 PTS</span></h3></div>-->
+                        </div>
+                        </div>
                         <p class="text-center"><strong>Ответы:</strong></p>
                         <div class="list-group">
                             <a href="#" class="list-group-item text-center" id="ans1">Answer 1</a>

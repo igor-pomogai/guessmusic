@@ -25,7 +25,7 @@ function mbox() {                           //старт игры, запуск 
     //if (a != a2) {
     audio.src = 'http://guessmelody.com/'+musicArr[a].file;                   //указываем путь к воспроизводиму файлу; путь является одним из свойств выбраного объекта (песни)
     pts = 300;                                           //значение таймера обратно к 15
-    //document.getElementById('timer').innerHTML = pts + ' PTS'; //публикуем его
+    document.getElementById('timer').innerHTML = pts + ' PTS'; //публикуем его
     audio.play();                                           //запуск аудио  
     timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
     document.getElementById('start').style.display = 'none';   
@@ -34,24 +34,23 @@ function mbox() {                           //старт игры, запуск 
             
 function timerGo() {                                                //функция запуска таймера
     console.log('timer poshel');
-    audio.onplaying = function() { console.log('onplaying pshlo') ;                                    // если аудио заиграло - делаем следующее:
+    //audio.onplaying = function() { console.log('onplaying pshlo') ;                                    // если аудио заиграло - делаем следующее:
         itemrotate(0, -4);   console.log('bobinki');                                        //запуск бобин
-        document.getElementById('answers').style.display = 'block';
+        //document.getElementById('answers').style.display = 'block';
         timerInterval = setInterval(function() {                    //сам таймер
             pts = pts-4;                                                //отнимаем значение секунд
             document.getElementById('timer').innerHTML = pts + ' PTS';  // записываем его
             if(pts==0) lose();}, 200);}                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
-    };
+    //};
 
 
 function mstop() {                                                  //остановка музыки
     audio.pause();                                                  //пауза
-    audio.currentTime = 0;
     audio.src="";
     clearInterval(timerInterval);
     itemstoprotate();                                               //остановили бобины и открутили на 0
     //document.getElementById('answers').style.display = 'none';
-    document.getElementById('start').style.display = 'block';
+    document.getElementById('start').style.display = 'inline-block';
     }
 
 function answerGen(){                                                       //генерация ответов
@@ -75,17 +74,17 @@ function answerGen(){                                                       //г
 function win(){                                                             // функция победы в раунде
     mstop();                                                                //остановим музыку и бобины                                   
     points = points+pts;                                                               //добавим +1 к очкам
-    document.getElementById('testid').innerHTML = points + '  points';           //опубликуем очки
-    //setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
+    document.getElementById('points').innerHTML = points + '  points';           //опубликуем очки
+    setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
 }
 
 function lose(){                                                            //проигрыш раунда
     mstop();                                                                //остановим  музыку
     alert('Не верно');
     lifes = lifes-1;                                                                //отнимем 1 жизнь
-    document.getElementById('testid2').innerHTML = lifes + '  life';            //опубликуем жизни
+    document.getElementById('lifes').innerHTML = lifes + '  life';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
-        //setTimeout('mbox()',1000);                                          // начнём след. раунд
+        setTimeout('mbox()',1000);                                          // начнём след. раунд
     }
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
         alert('ТЫ ЛОШАРА, ПРОЕБАЛ И ' + points + '  ОЧКОВ НАБРАЛ!');

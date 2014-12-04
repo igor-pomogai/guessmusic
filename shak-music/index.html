@@ -7,12 +7,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
 
-        <script src="js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script src="js/vendor/jquery_rotate.js"></script>
-        <script src="js/plugins.js"></script>
         <script src="js/musicarr.js"></script>
         <script src="js/melodybox.js"></script>
         <style type="text/css">
@@ -32,23 +31,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a href="#" class="navbar-brand">SHACK's SITE</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbar-contents">
-                    <ul class="nav navbar-nav" role="navigation">
-                        <li><a href="#">Music Recorder</a></li>
-                        <li><a href="#">Future Project 1</a></li>
-                        <li><a href="#">Future Project 2</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                      
-                        <li><a href="#">Sign Up</a></li>
-                        <li><a href="#">Sign In</a></li>
-                      
-                        <li><button class="btn btn-warning navbar-btn btn-sm" type="button">HELP</button></li>
-                    </ul>
+                    <a href="#" class="navbar-brand">guessmelody.com</a>
                 </div>
             </div>
         </header>
@@ -56,72 +39,41 @@
         <div class="container">
 
             <div class="row">
-                
-                <div class="col-lg-12 well text-center">
-                    <div class="col-lg-4 col-lg-offset-4">
-                        <button class="btn btn-success btn-lg" id="start" onclick="mbox()"><span class="glyphicon glyphicon-play-circle"></span> PLAY</button>
-                        <!--<p id="start" onclick="mbox()" style="cursor: pointer; text-align:center; display: inline-block;">СТАРТ</p>-->
+                <div id="recorder" class="col-lg-4">
+                    <img src="img/recorder.png" alt="" style="display:block; width: 100%;">
+                    <img src="img/cas1.png" class="rotateimg" style=""/>
+                    <img src="img/cas2.png" class="rotateimg" style="right:0px;"/>
+                </div>
+
+                <aside class="col-lg-5">
+                    <div class="row">
+                        <div class="col-lg-12 col-lg-offset-4">
+                        <button class="btn btn-success " id="start" onclick="mbox()"><span class="glyphicon glyphicon-play-circle"></span> PLAY</button>
                         <button class="btn btn-danger" onclick="mstop()"><span class="glyphicon glyphicon-stop"></span> STOP</button>
-                        <!--<p onclick="mstop()" style="cursor: pointer; text-align:center; display: inline-block;">СТОП</p>-->
-                       <!-- <p id="testid" style="cursor: pointer; text-align:center; display: inline-block; margin-left: 20px;">0 points</p>
-                        <p id="testid2" style="cursor: pointer; text-align:center; display: inline-block; margin-left: 10px;">3 life</p>-->
+                        </div>
                     </div>
-                </div>
-    
-            </div>
 
-            <div class="row">
-                <div id="recorder" class="col-lg-6 col-md-6">
-                    <img src="img/magnit.jpg" alt="" style="display:block; width: 100%;">
-                    <!--
-                    <img src="http://placehold.it/30x30" class="rotateImg" style="clear: both; display: block; border-radius: 50%; position: absolute; top: 0px; width: 49.5%; background-color: red;" />
-                    <img src="http://placehold.it/30x0" class="rotateImg" style="clear: both; display: block; border-radius: 50%; position: absolute; top: 0px; right: 0px; width: 49.5%; background-color: red;" />
-
-                -->
-                </div>
-
-                <aside class="col-lg-6 col-md-6">
-                  
-                    <div class="row well">
-                        <div class="col-lg-5 col-md-7 col-sm-4 col-xs-4">
-                            <img src="http://placehold.it/200x200" alt="Image" class="img">
-                        </div>
-
-                        <div class="col-lg-7 col-md-5 col-sm-8 col-xs-8">
-                            <h3>Music GURU</h1>
-
-                            <ul class="list-inline">
-                                <li>
-                                    Registered: <span class="glyphicon glyphicon-time text-muted"></span> December 1, 2014
-                                </li>
-                            </ul>
-
-
-                            <ul class="list-inline">
-                                <li>
-                                   <h3> <label id="testid" class="label label-success">0 points</label></h3>  
-                                </li>
-                                <li>
-                                    <h3><label id="testid2" class="label label-warning">3 life</label></h3>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="row well" style="">
+                        <span class="label label-warning" id="timer">300</span>
+                        <span class="label label-success" id="points">0 total</span>
+                        <span class="label label-danger" id="lifes">3 lifes</span>
                     </div>
                      
-                   
                     <div class="row well">
-                        <p class="text-center"><strong>Choose an answer:</strong></p>
+                        <p class="text-center"><strong>Ответы:</strong></p>
                         <div class="list-group">
-                            <a href="#" class="list-group-item" id="ans1">Answer 1</a>
-                            <a href="#" class="list-group-item" id="ans2">Answer 2</a>
-                            <a href="#" class="list-group-item" id="ans3">Answer 3</a>
-                            <a href="#" class="list-group-item" id="ans4">Answer 4</a>
+                            <a href="#" class="list-group-item text-center" id="ans1">Answer 1</a>
+                            <a href="#" class="list-group-item text-center" id="ans2">Answer 2</a>
+                            <a href="#" class="list-group-item text-center" id="ans3">Answer 3</a>
+                            <a href="#" class="list-group-item text-center" id="ans4">Answer 4</a>
                         </div>
                     </div>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button>
+                    <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
                 </aside>
 
-            <div class="modal fade" id="modal-test">
+                <aside id="history" class="col-lg-3"></aside>
+
+                <!-- <div class="modal fade" id="modal-test">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -144,7 +96,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 
             </div>            
@@ -155,16 +107,8 @@
         <div class="container">
            
         </div>
-<!--
-        <div id="answers" style="width: 60%; max-width: 700px; margin: auto; text-align: center; margin-top: 10px;">
-            <div class="answerbox" id="ans1" style="display:block; border: 1px solid #3e3e3e; min-height: 20px; width: 100%; margin-top: 5px; text-align: center"></div>
-            <div class="answerbox" id="ans2" style="display:block; border: 1px solid #3e3e3e; min-height: 20px; width: 100%; margin-top: 5px; text-align: center"></div>
-            <div class="answerbox" id="ans3" style="display:block; border: 1px solid #3e3e3e; min-height: 20px; width: 100%; margin-top: 5px; text-align: center"></div>
-            <div class="answerbox" id="ans4" style="display:block; border: 1px solid #3e3e3e; min-height: 20px; width: 100%; margin-top: 5px; text-align: center"></div>
-        </div>
--->
     <!-- JS -->
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+
     <script src="js/bootstrap.min.js"></script>
    
     </body>

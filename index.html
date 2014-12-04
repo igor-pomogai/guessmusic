@@ -14,6 +14,8 @@
         <script src="js/vendor/jquery_rotate.js"></script>
         <script src="js/musicarr.js"></script>
         <script src="js/melodybox.js"></script>
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
+        <script type="text/javascript">VK.init({apiId: 4664803, onlyWidgets: true});</script>
         <style type="text/css">
             body {
                 padding-top: 70px;
@@ -39,13 +41,9 @@
         <div class="container">
 
             <div class="row text-center">
-                <div id="recorder" class="col-lg-4 col-md-4 hidden-sm hidden-xs">
-                    <img src="img/recorder.png" alt="" style="display:block; width: 100%;">
-                    <img src="img/cas1.png" class="rotateimg" style=""/>
-                    <img src="img/cas2.png" class="rotateimg" style="right:0px;"/>
-                </div>
+                    
+                <div class="col-lg-6 col-md-6 col-sm-9 col-xs-12">
 
-                <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
                     <div class="row well" style="">
                         <h3 style="margin:0;"><span class="label label-success" id="points">0 total</span>
                         <span class="label label-danger" id="lifes">3 lifes</span></h3>
@@ -62,54 +60,56 @@
                         </div>
                         <p class="text-center"><strong>Ответы:</strong></p>
                         <div class="list-group">
-                            <a href="#" class="list-group-item text-center" id="ans1">Answer 1</a>
-                            <a href="#" class="list-group-item text-center" id="ans2">Answer 2</a>
-                            <a href="#" class="list-group-item text-center" id="ans3">Answer 3</a>
-                            <a href="#" class="list-group-item text-center" id="ans4">Answer 4</a>
+                            <a href="#" class="list-group-item text-center" id="ans1">-</a>
+                            <a href="#" class="list-group-item text-center" id="ans2">-</a>
+                            <a href="#" class="list-group-item text-center" id="ans3">-</a>
+                            <a href="#" class="list-group-item text-center" id="ans4">-</a>
                         </div>
                     </div>
                     <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
                 </div>
 
-                <aside id="history" class="col-lg-3 col-md-3 col-sm-4 col-xs-12"></aside>
+                <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 hidden-xs" style="padding:0;">
+                    <div id="recorder">
+                        <img src="img/recorder.png" alt="" style="display:block; width: 100%;">
+                        <img src="img/cas1.png" class="rotateimg"/>
+                        <img src="img/cas2.png" class="rotateimg" style="right: 0px;" />
+                    </div>
+                </div>
 
-                <!-- <div class="modal fade" id="modal-test">
+                 <div class="modal fade" id="modal-test" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                <h4 class="modal-title">You WIN!!</h4>
+                                <h4 class="modal-title" id="wintitle">УГАДАЛИ!</h4>
                             </div>
                             
                             <div class="modal-body">
-                                <img src="http://placehold.it/200x200" alt="Image" class="img pull-left">
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p id="wintext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                             </div>
-
-                            <div class="modal-footer">
-                                <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-
-                                <button class="btn btn-primary" type="button">Save</button>
+                            <div id="vk_like"></div>
+                            <div class="modal-footer text-center">
+                                <button onclick = "mbox()" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="winbut">NEXT</button>
                             </div>
 
                         </div>
                     </div>
-                </div> -->
+                </div> 
 
                 
             </div>            
             
 
         </div>
-
+        
         <div class="container">
            
         </div>
     <!-- JS -->
-
-    <script src="js/bootstrap.min.js"></script>
-   
+    <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "button"});</script>
+    <script src="js/bootstrap.js"></script>
     </body>
 </html>

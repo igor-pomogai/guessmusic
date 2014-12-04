@@ -31,10 +31,11 @@ function mbox() {                           //старт игры, запуск 
     //document.getElementById('start').style.display = 'none';   
     answerGen();                                            //генерация ответов
     itemrotate(0, -4);   console.log('bobinki');
+    $('#start').attr('onclick','');
     }
             
 function timerGo() {                                                //функция запуска таймера
-    setTimeout(function(){
+    timerTimeout = setTimeout(function(){
     //console.log('timer poshel');
     //audio.onplaying = function() { console.log('onplaying pshlo') ;                                    // если аудио заиграло - делаем следующее:
                                                 //запуск бобин
@@ -46,12 +47,13 @@ function timerGo() {                                                //функц
 
 
 function mstop() {                                                  //остановка музыки
+    clearTimeout(timerTimeout);
     audio.pause();                                                  //пауза
-    audio.src="";
     clearInterval(timerInterval);
     itemstoprotate();                                               //остановили бобины и открутили на 0
     //document.getElementById('answers').style.display = 'none';
     document.getElementById('start').style.display = 'inline-block';
+    $('#start').attr('onclick','mbox()');
     }
 
 function answerGen(){                                                       //генерация ответов
@@ -76,24 +78,47 @@ function win(){                                                             // �
     mstop();                                                                //остановим музыку и бобины                                   
     points = points+pts;                                                               //добавим +1 к очкам
     document.getElementById('points').innerHTML = points + '  points';           //опубликуем очки
-    setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
+    //setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
+    document.getElementById('wintitle').innerHTML = 'Угадали!';
+    document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
+    $('winbut').attr('onclick','mbox()');
+    document.getElementById('winbut').innerHTML = 'Следующий трэк!';
+    $('#modal-test').modal('show');
 }
 
 function lose(){                                                            //проигрыш раунда
     mstop();                                                                //остановим  музыку
-    alert('Не верно');
     lifes = lifes-1;                                                                //отнимем 1 жизнь
     document.getElementById('lifes').innerHTML = lifes + '  life';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
-        setTimeout('mbox()',1000);                                          // начнём след. раунд
+        document.getElementById('wintitle').innerHTML = 'Не угадали!';
+        document.getElementById('wintext').innerHTML = 'Жаль... \n Правильный ответ: \n' + musicArr[a].song;
+        document.getElementById('winbut').innerHTML = 'Следующий трэк!';
+        document.getElementById('winbut').onclick = function() {mbox();};
+        $('#modal-test').modal('show');
     }
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
-        alert('ТЫ ЛОШАРА, ПРОЕБАЛ И ' + points + '  ОЧКОВ НАБРАЛ!');
-        points=0;
-        lifes=3;
-        document.getElementById('testid').innerHTML = points;
-        document.getElementById('testid2').innerHTML = lifes;
+        document.getElementById('points').innerHTML = points;
+        document.getElementById('lifes').innerHTML = lifes;
+        document.getElementById('wintitle').innerHTML = 'Игра окончена!';
+        document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков';
+        document.getElementById('winbut').innerHTML = 'Закончить';
+        document.getElementById('winbut').onclick = function() {resetgame();};
+        document.getElementById('vk_like').style.display = 'inline-block';
+        $('#modal-test').modal('show');
     }
+}
+
+function resetgame() {
+    clearInterval(timerInterval);
+    clearTimeout(timerTimeout);
+    lifes = 3; points = 0; pts = 300;
+    document.getElementById('points').innerHTML = points + ' points';
+    document.getElementById('lifes').innerHTML = lifes + ' lifes';
+    document.getElementById('start').onclick = function() {mbox();};
+    document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
+    document.getElementById('vk_like').style.display = 'none';
+    
 }
 
 

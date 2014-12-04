@@ -25,9 +25,9 @@ html {
 	width: 49.5%;
 }
 
-#history {
-	height: 300px;
-	background-color: #3e3;
+#vk_like {
+	display: none;
+	margin-bottom: 10px;
 }
 
 

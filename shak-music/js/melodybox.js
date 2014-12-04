@@ -30,18 +30,19 @@ function mbox() {                           //старт игры, запуск 
     timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
     //document.getElementById('start').style.display = 'none';   
     answerGen();                                            //генерация ответов
+    itemrotate(0, -4);   console.log('bobinki');
     }
             
 function timerGo() {                                                //функция запуска таймера
-    console.log('timer poshel');
+    setTimeout(function(){
+    //console.log('timer poshel');
     //audio.onplaying = function() { console.log('onplaying pshlo') ;                                    // если аудио заиграло - делаем следующее:
-        itemrotate(0, -4);   console.log('bobinki');                                        //запуск бобин
-        //document.getElementById('answers').style.display = 'block';
+                                                //запуск бобин
         timerInterval = setInterval(function() {                    //сам таймер
             pts = pts-4;                                                //отнимаем значение секунд
             document.getElementById('start').innerHTML = pts + ' PTS';  // записываем его
-            if(pts==0) lose();}, 200);}                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
-   // };
+            if(pts==0) lose();}, 200);},1500);                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
+   };
 
 
 function mstop() {                                                  //остановка музыки

@@ -92,7 +92,7 @@ function lose(){                                                            //п
     mstop();                                                                //остановим  музыку
     lifes = lifes-1;                                                                //отнимем 1 жизнь
     historyadd(0,'danger');
-    document.getElementById('lifes').innerHTML = lifes + '  life';            //опубликуем жизни
+    document.getElementById('lifes').innerHTML = lifes + '  lifes';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
         document.getElementById('wintext').innerHTML = 'Жаль... \n Правильный ответ: \n' + musicArr[a].song;
@@ -101,8 +101,8 @@ function lose(){                                                            //п
         $('#modal-test').modal('show');
     }
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
-        document.getElementById('points').innerHTML = points;
-        document.getElementById('lifes').innerHTML = lifes;
+        document.getElementById('points').innerHTML = points + ' points';
+        document.getElementById('lifes').innerHTML = lifes + ' lifes';
         document.getElementById('wintitle').innerHTML = 'Игра окончена!';
         document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков';
         document.getElementById('winbut').innerHTML = 'Закончить';

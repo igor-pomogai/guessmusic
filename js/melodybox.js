@@ -4,6 +4,7 @@ var a;                  //глобальная переменная, котор�
 //var a2;                // глобальная переменная обозначающая трэк из предыдущего раунда
 var points=0;                // очки
 var lifes=3;                //жизни
+var guessed = 0;
 var pts = 300;           //секунды
 var rotateInterval = 0;
 var timerInterval = 0;
@@ -77,9 +78,11 @@ function answerGen(){                                                       //г
 
 function win(){                                                             // функция победы в раунде
     mstop();                                                                //остановим музыку и бобины                                   
-    points = points+pts;                                                               //добавим +1 к очкам
+    points = points+pts;                                                               //добавим + к очкам
+    guessed = guessed+1;
     historyadd(pts,'success');
-    document.getElementById('points').innerHTML = points + '  points';           //опубликуем очки
+    document.getElementById('points').innerHTML = points + '  очков';           //опубликуем очки
+    document.getElementById('guessed').innerHTML = guessed + ' угадано'
     //setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
@@ -92,7 +95,7 @@ function lose(){                                                            //п
     mstop();                                                                //остановим  музыку
     lifes = lifes-1;                                                                //отнимем 1 жизнь
     historyadd(0,'danger');
-    document.getElementById('lifes').innerHTML = lifes + '  lifes';            //опубликуем жизни
+    document.getElementById('lifes').innerHTML = lifes + '  жизни';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
         document.getElementById('wintext').innerHTML = 'Жаль... \n Правильный ответ: \n' + musicArr[a].song;
@@ -101,10 +104,11 @@ function lose(){                                                            //п
         $('#modal-test').modal('show');
     }
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
-        document.getElementById('points').innerHTML = points + ' points';
-        document.getElementById('lifes').innerHTML = lifes + ' lifes';
+        document.getElementById('points').innerHTML = points + ' очков';
+        document.getElementById('lifes').innerHTML = lifes + ' жизни';
+        document.getElementById('guessed').innerHTML = guessed + ' угадано'
         document.getElementById('wintitle').innerHTML = 'Игра окончена!';
-        document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков';
+        document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен!';
         document.getElementById('winbut').innerHTML = 'Закончить';
         document.getElementById('winbut').onclick = function() {resetgame();};
         document.getElementById('vk_like').style.display = 'inline-block';
@@ -115,9 +119,10 @@ function lose(){                                                            //п
 function resetgame() {
     clearInterval(timerInterval);
     clearTimeout(timerTimeout);
-    lifes = 3; points = 0; pts = 300;
-    document.getElementById('points').innerHTML = points + ' points';
-    document.getElementById('lifes').innerHTML = lifes + ' lifes';
+    lifes = 3; points = 0; pts = 300; guessed = 0;
+    document.getElementById('points').innerHTML = points + ' очков';
+    document.getElementById('lifes').innerHTML = lifes + ' жизни';
+    document.getElementById('guessed').innerHTML = guessed + ' угадано'
     document.getElementById('start').onclick = function() {mbox();};
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
     for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};

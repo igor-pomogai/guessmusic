@@ -1,13 +1,10 @@
 var audio = new Audio(); //аудио
 var audioHis = new Audio();// аудио из истории
 var a;                  //глобальная переменная, которая обозначает нужный элемент из массива с треками  
-//var a2;                // глобальная переменная обозначающая трэк из предыдущего раунда
 var points=0;                // очки
 var lifes=3;                //жизни
-var guessed = 0;
+var guessed = 0;            //угаданные
 var pts = 300;           //секунды
-var rotateInterval = 0;
-var timerInterval = 0;
 
 
 function itemrotate(angle, deg){            // функция вращения бобин, (начальный градус угла, на какой угол смещать)
@@ -24,13 +21,11 @@ function itemstoprotate(){                      //функция оставно�
 
 function mbox() {                           //старт игры, запуск песни
     a = Math.floor(Math.random()*musicArr.length); //случайно выбираем порядковый номер объекта в массиве
-    //if (a != a2) {
     audio.src = 'http://guessmelody.com/'+musicArr[a].file;                   //указываем путь к воспроизводиму файлу; путь является одним из свойств выбраного объекта (песни)
     pts = 300;                                           //значение таймера обратно к 15
     document.getElementById('start').innerHTML = pts + ' PTS'; //публикуем его
     audio.play();                                           //запуск аудио  
     timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
-    //document.getElementById('start').style.display = 'none';   
     answerGen();                                            //генерация ответов
     itemrotate(0, -4);   console.log('bobinki');
     $('#start').attr('onclick','');
@@ -38,9 +33,6 @@ function mbox() {                           //старт игры, запуск 
             
 function timerGo() {                                                //функция запуска таймера
     timerTimeout = setTimeout(function(){
-    //console.log('timer poshel');
-    //audio.onplaying = function() { console.log('onplaying pshlo') ;                                    // если аудио заиграло - делаем следующее:
-                                                //запуск бобин
         timerInterval = setInterval(function() {                    //сам таймер
             pts = pts-4;                                                //отнимаем значение секунд
             document.getElementById('start').innerHTML = pts + ' PTS';  // записываем его
@@ -53,8 +45,6 @@ function mstop() {                                                  //остан
     clearTimeout(timerTimeout);
     clearInterval(timerInterval);
     itemstoprotate();                                               //остановили бобины и открутили на 0
-    //document.getElementById('answers').style.display = 'none';
-    //document.getElementById('start').style.display = 'inline-block';
     $('#start').attr('onclick','mbox()');
     }
 
@@ -83,7 +73,6 @@ function win(){                                                             // �
     historyadd(pts,'success');
     document.getElementById('points').innerHTML = points + '  очков';           //опубликуем очки
     document.getElementById('guessed').innerHTML = guessed + ' угадано'
-    //setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     $('winbut').attr('onclick','mbox()');

@@ -88,7 +88,6 @@ function win(){                                                             // �
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     $('winbut').attr('onclick','mbox()');
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
-    document.getElementById('winbut').onclick = function() {mbox();};
     $('#modal-test').modal('show');
 }
 
@@ -125,6 +124,7 @@ function resetgame() {
     document.getElementById('start').onclick = function() {mbox();};
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
     for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};
+    document.getElementById('winbut').onclick = function() {mbox();};
     document.getElementById('vk_like').style.display = 'none';
     
 }

@@ -88,6 +88,7 @@ function win(){                                                             // �
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     $('winbut').attr('onclick','mbox()');
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
+    document.getElementById('winbut').onclick = function() {mbox();};
     $('#modal-test').modal('show');
 }
 

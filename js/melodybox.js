@@ -49,12 +49,12 @@ function timerGo() {                                                //функц
 
 
 function mstop() {                                                  //остановка музыки
-    clearTimeout(timerTimeout);
     audio.pause();                                                  //пауза
+    clearTimeout(timerTimeout);
     clearInterval(timerInterval);
     itemstoprotate();                                               //остановили бобины и открутили на 0
     //document.getElementById('answers').style.display = 'none';
-    document.getElementById('start').style.display = 'inline-block';
+    //document.getElementById('start').style.display = 'inline-block';
     $('#start').attr('onclick','mbox()');
     }
 
@@ -117,8 +117,6 @@ function lose(){                                                            //п
 }
 
 function resetgame() {
-    clearInterval(timerInterval);
-    clearTimeout(timerTimeout);
     lifes = 3; points = 0; pts = 300; guessed = 0;
     document.getElementById('points').innerHTML = points + ' очков';
     document.getElementById('lifes').innerHTML = lifes + ' жизни';

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
 
         <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -42,7 +42,7 @@
 
             <div class="row text-center">
                     
-                <div class="col-lg-6 col-md-6 col-sm-9 col-xs-12">
+                <div class="col-lg-6 col-lg-offset-2 col-md-6 col-sm-9 col-xs-12">
 
                     <div class="row well" style="">
                         <h3 style="margin:0;"><span class="label label-success" id="points">0 total</span>
@@ -59,11 +59,11 @@
                         </div>
                         </div>
                         <p class="text-center"><strong>Ответы:</strong></p>
-                        <div class="list-group">
-                            <a href="#" class="list-group-item text-center" id="ans1">-</a>
-                            <a href="#" class="list-group-item text-center" id="ans2">-</a>
-                            <a href="#" class="list-group-item text-center" id="ans3">-</a>
-                            <a href="#" class="list-group-item text-center" id="ans4">-</a>
+                        <div id="answers" class="list-group">
+                            <a href="#" class="list-group-item text-center answer" id="ans1">-</a>
+                            <a href="#" class="list-group-item text-center answer" id="ans2">-</a>
+                            <a href="#" class="list-group-item text-center answer" id="ans3">-</a>
+                            <a href="#" class="list-group-item text-center answer" id="ans4">-</a>
                         </div>
                     </div>
                     <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
@@ -75,20 +75,22 @@
                         <img src="img/cas1.png" class="rotateimg"/>
                         <img src="img/cas2.png" class="rotateimg" style="right: 0px;" />
                     </div>
+                        <div id="history" class="list-group well">
+                            <a href="#" class="list-group-item text-center answer" id="hist1" onclick="playHis(id)">История</a>
+                        </div>
                 </div>
 
                  <div class="modal fade" id="modal-test" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                                 <h4 class="modal-title" id="wintitle">УГАДАЛИ!</h4>
                             </div>
                             
                             <div class="modal-body">
 
-                                <p id="wintext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p id="wintext"></p>
                             </div>
                             <div id="vk_like"></div>
                             <div class="modal-footer text-center">

@@ -1,4 +1,5 @@
 var audio = new Audio(); //аудио
+var audioHis = new Audio();// аудио из истории
 var a;                  //глобальная переменная, которая обозначает нужный элемент из массива с треками  
 //var a2;                // глобальная переменная обозначающая трэк из предыдущего раунда
 var points=0;                // очки
@@ -77,6 +78,7 @@ function answerGen(){                                                       //г
 function win(){                                                             // функция победы в раунде
     mstop();                                                                //остановим музыку и бобины                                   
     points = points+pts;                                                               //добавим +1 к очкам
+    historyadd(pts,'success');
     document.getElementById('points').innerHTML = points + '  points';           //опубликуем очки
     //setTimeout('mbox()',1000);                                              //начнём след. раунд но дадим перерывчик в 1 сек
     document.getElementById('wintitle').innerHTML = 'Угадали!';
@@ -89,6 +91,7 @@ function win(){                                                             // �
 function lose(){                                                            //проигрыш раунда
     mstop();                                                                //остановим  музыку
     lifes = lifes-1;                                                                //отнимем 1 жизнь
+    historyadd(0,'danger');
     document.getElementById('lifes').innerHTML = lifes + '  life';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
@@ -117,8 +120,27 @@ function resetgame() {
     document.getElementById('lifes').innerHTML = lifes + ' lifes';
     document.getElementById('start').onclick = function() {mbox();};
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
+    for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};
     document.getElementById('vk_like').style.display = 'none';
     
+}
+
+function historyadd(ptsHis,labelstyle) {
+    var curTrackFile = musicArr[a].file;
+    var curTrackSong = musicArr[a].song;
+    $('<a href="#" onclick="playHis(id)" class="list-group-item text-left" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
+}
+
+function playHis(track) {
+    itemstoprotate();
+    if (audioHis.src == 'http://guessmelody.com/' + track || track == 'hist1'){
+        audioHis.pause();
+        audioHis.src='';
+    } else {
+    audioHis.pause();
+    audioHis.src = 'http://guessmelody.com/' + track;
+    audioHis.play();
+    itemrotate(0,-4)}
 }
 
 

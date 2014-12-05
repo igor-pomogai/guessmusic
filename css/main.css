@@ -14,6 +14,10 @@ html {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); */
 } 
 
+body {
+
+}
+
 #recorder {
 	padding: 0;
 }
@@ -28,6 +32,10 @@ html {
 #vk_like {
 	display: none;
 	margin-bottom: 10px;
+}
+
+#hist1 {
+	font-weight: bold;
 }
 
 

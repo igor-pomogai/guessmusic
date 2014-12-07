@@ -61,7 +61,7 @@ function answerGen(){                                                       //г
     else {i--;};}                                                           // если число rand таки нашлось в массиве usedTracks то добавляем i++ для повтора
     q = 1 + Math.random()*4;                                                //теперь когда у нас есть 4 точно разных ответа, генерируем число от 1 до 4
     q = q^0;                                                                // чтобы выбрать блок, куда впишем правильный ответ
-    document.getElementById('ans'+q).innerHTML = musicArr[a].song; //заменяем данные из выбранного блока на правильный ответ
+    document.getElementById('ans'+q).innerHTML = musicArr[a].song + '!!!!!'; //заменяем данные из выбранного блока на правильный ответ
     document.getElementById('ans'+q).onclick = function() {win();};         //задаем клику на такой ответ функцию победы в раунде
 
 }
@@ -72,7 +72,7 @@ function win(){                                                             // �
     guessed = guessed+1;
     historyadd(pts,'success');
     document.getElementById('points').innerHTML = points + '  очков';           //опубликуем очки
-    document.getElementById('guessed').innerHTML = guessed + ' угадано'
+    document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     $('winbut').attr('onclick','mbox()');
@@ -95,7 +95,7 @@ function lose(){                                                            //п
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
         document.getElementById('points').innerHTML = points + ' очков';
         document.getElementById('lifes').innerHTML = lifes + ' жизни';
-        document.getElementById('guessed').innerHTML = guessed + ' угадано'
+        document.getElementById('guessed').innerHTML = guessed;
         document.getElementById('wintitle').innerHTML = 'Игра окончена!';
         document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен!';
         document.getElementById('winbut').innerHTML = 'Закончить';
@@ -109,7 +109,7 @@ function resetgame() {
     lifes = 3; points = 0; pts = 300; guessed = 0;
     document.getElementById('points').innerHTML = points + ' очков';
     document.getElementById('lifes').innerHTML = lifes + ' жизни';
-    document.getElementById('guessed').innerHTML = guessed + ' угадано'
+    document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('start').onclick = function() {mbox();};
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
     for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};
@@ -121,7 +121,7 @@ function resetgame() {
 function historyadd(ptsHis,labelstyle) {
     var curTrackFile = musicArr[a].file;
     var curTrackSong = musicArr[a].song;
-    $('<a href="#" onclick="playHis(id)" class="list-group-item text-left" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
+    $('<a href="#hist1" onclick="playHis(id)" class="list-group-item text-left" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
 }
 
 function playHis(track) {

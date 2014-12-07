@@ -1,5 +1,3 @@
-/*! Author: Artyom Arkhipov  -  ar.arkhipov@gmail.com */
-
 @font-face {font-family: lcdfamily; src: url(lcdfamily.ttf);}
 
 html {
@@ -37,6 +35,15 @@ body {
 
 #hist1 {
 	font-weight: bold;
+}
+
+#answers {
+	margin-bottom: 7px;
+}
+
+#new_game {
+	padding: 5px 5px;
+	margin:0;
 }
 
 

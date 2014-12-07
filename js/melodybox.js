@@ -5,6 +5,7 @@ var points=0;                // очки
 var lifes=3;                //жизни
 var guessed = 0;            //угаданные
 var pts = 300;           //секунды
+var timerInterval=0;
 
 
 function itemrotate(angle, deg){            // функция вращения бобин, (начальный градус угла, на какой угол смещать)
@@ -106,6 +107,7 @@ function lose(){                                                            //п
 }
 
 function resetgame() {
+    mstop();
     lifes = 3; points = 0; pts = 300; guessed = 0;
     document.getElementById('points').innerHTML = points + ' очков';
     document.getElementById('lifes').innerHTML = lifes + ' жизни';
@@ -134,6 +136,28 @@ function playHis(track) {
     audioHis.src = 'http://guessmelody.com/' + track;
     audioHis.play();
     itemrotate(0,-4)}
+}
+
+function muteAudio() {
+    if(audio.muted==true){
+        audio.muted=false;
+        $('#mutespan').removeClass('glyphicon-volume-up');
+        $('#mutespan').addClass('glyphicon-volume-off');
+    }
+    else{
+        $('#mutespan').removeClass('glyphicon-volume-off');
+        $('#mutespan').addClass('glyphicon-volume-up');
+        audio.muted=true;
+    }
+}
+
+function newGame() {
+    document.getElementById('wintitle').innerHTML = 'Начать новую игру?';
+    document.getElementById('wintext').innerHTML = 'Вы уверены, что хотите начать новую игру? Весь текущий прогресс будет утерян!';
+    document.getElementById('winbut').innerHTML = 'Да, начать новую игру!';
+    document.getElementById('winbut').onclick = function() {resetgame();};
+    document.getElementById('winbut2').style.display = 'inline-block';
+    $('#modal-test').modal('show');
 }
 
 

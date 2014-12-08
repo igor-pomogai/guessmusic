@@ -103,7 +103,6 @@ function lose(){                                                            //п
         document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен!';
         document.getElementById('winbut').innerHTML = 'Закончить';
         document.getElementById('winbut').onclick = function() {resetgame();};
-        document.getElementById('vk_like').style.display = 'inline-block';
         document.getElementById('winbut2').style.display = 'none';
         $('#modal-test').modal('show');
     }

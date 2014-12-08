@@ -78,6 +78,7 @@ function win(){                                                             // �
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     $('winbut').attr('onclick','mbox()');
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
+    document.getElementById('winbut2').style.display = 'none';
     $('#modal-test').modal('show');
 }
 
@@ -91,6 +92,7 @@ function lose(){                                                            //п
         document.getElementById('wintext').innerHTML = 'Жаль... \n Правильный ответ: \n' + musicArr[a].song;
         document.getElementById('winbut').innerHTML = 'Следующий трэк!';
         document.getElementById('winbut').onclick = function() {mbox();};
+        document.getElementById('winbut2').style.display = 'none';
         $('#modal-test').modal('show');
     }
     else {                                                                  //если жизни закончили, то оповестим игрока о результатах
@@ -102,6 +104,7 @@ function lose(){                                                            //п
         document.getElementById('winbut').innerHTML = 'Закончить';
         document.getElementById('winbut').onclick = function() {resetgame();};
         document.getElementById('vk_like').style.display = 'inline-block';
+        document.getElementById('winbut2').style.display = 'none';
         $('#modal-test').modal('show');
     }
 }

@@ -76,7 +76,7 @@ function win(){                                                             // �
     document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
-    $('winbut').attr('onclick','mbox()');
+    $('#winbut').onclick = function() {mbox()};
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
     document.getElementById('winbut2').style.display = 'none';
     $('#modal-test').modal('show');

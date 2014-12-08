@@ -15,6 +15,7 @@ html {
 body {
 	background: url(../img/footer_lodyas.png);
 	background-repeat: repeat;
+	height: 100%;
 }
 
 #recorder {
@@ -26,11 +27,6 @@ body {
 	position: absolute;
 	top: 0px;
 	width: 49.5%;
-}
-
-#vk_like {
-	display: none;
-	margin-bottom: 10px;
 }
 
 #hist1 {
@@ -46,4 +42,10 @@ body {
 	margin:0;
 }
 
+.footer {
+	height:50px;
+	margin-top:-50px;
+	background-color: #222;
+	line-height: 45px;
+}
 

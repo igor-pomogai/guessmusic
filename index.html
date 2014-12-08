@@ -49,7 +49,7 @@
 
         </header>
 
-        <div class="container">
+        <div class="container" style="min-height:100%; padding-bottom:50px;">
 
             <div class="row text-center">
 
@@ -82,13 +82,9 @@
                             <a href="#" class="list-group-item text-center answer" id="ans3">-</a>
                             <a href="#" class="list-group-item text-center answer" id="ans4">-</a>
                         </div>
-                        <button class="btn btn-warning btn-lg" id="new_game" onclick="newGame()"><span class="glyphicon glyphicon-repeat"> </span> Начать игру заново</button>
+                        <div id="vk_like" style="display:inline-block; vertical-align:middle; margin:0;"></div>
+                        <button class="btn btn-warning btn-lg" id="new_game" onclick="newGame()"><span class="glyphicon glyphicon-repeat"> </span> Начать заново</button>
                     </div>
-                    <!-- Yandex.Metrika informer -->
-                        <a href="https://metrika.yandex.ru/stat/?id=27402497&amp;from=informer"
-                        target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/27402497/3_0_EDE8ECFF_CDC8CCFF_0_pageviews"
-                        style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:27402497,lang:'ru'});return false}catch(e){}" class="hidden-sm hidden-xs"/></a>
-                        <!-- /Yandex.Metrika informer -->
                     <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
                     <div class="pluso visible-sm hidden-lg hidden-md hidden-xs" data-background="transparent" data-options="medium,square,line,horizontal,counter,theme=07" data-services="vkontakte,facebook,twitter,odnoklassniki,moimir" style="display:inline-block; text-align:center;"></div>
 
@@ -100,7 +96,7 @@
                         <img src="img/cas1.png" class="rotateimg"/>
                         <img src="img/cas2.png" class="rotateimg" style="right: 0px;" />
                     </div>
-                        <div id="history" class="list-group well">
+                        <div id="history" class="list-group well" style="">
                             <a href="#hist1" class="list-group-item text-center answer" id="hist1" onclick="playHis(id)">История </a>
                         </div>
                 </div>
@@ -117,7 +113,6 @@
 
                                 <p id="wintext"></p>
                             </div>
-                            <div id="vk_like"></div>
                             <div class="modal-footer text-center">
                                 <button onclick = "mbox()" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="winbut"></button>
                                 <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%; display: none; margin-left: -5px; margin-top: 10px;" id="winbut2">Отмена</button>
@@ -127,8 +122,18 @@
                     </div>
                 </div>                 
             </div>            
+
         </div>
+        <div style=""></div>
+        <footer class="footer hidden-xs">
+            <!-- Yandex.Metrika informer -->
+                       <a href="https://metrika.yandex.ru/stat/?id=27402497&amp;from=informer"
+                        target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/27402497/3_0_EDE8ECFF_CDC8CCFF_0_pageviews"
+                        style="width:80px; height:30px; border:0; margin-left:8%;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:27402497,lang:'ru'});return false}catch(e){}" class=""/></a>
+            <!-- /Yandex.Metrika informer --> 
+        </footer>
     <!-- JS -->
+
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
@@ -164,7 +169,7 @@
     var h=d[g]('body')[0];
     h.appendChild(s);
   }})();</script>
-    <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "button"});</script>
+    <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "mini"});</script>
     <script src="js/bootstrap.js"></script>
     </body>
 </html>

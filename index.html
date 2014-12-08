@@ -4,10 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="webmoney" content="932E5F45-75FB-4D00-8F9A-524410D6FD33"/>
+        <meta name="openstat-verification" content="4b2187e355bb97c32ea1fb3d7ae90aab768d5b27" />
         <title>Угадай мелодию! Играйте онлайн!</title>
         <meta name="description" content="Игра Угадай Мелодию онлайн! Отгадывай музыку, получай очки и делись результатом с друзьями!">
         <meta name="viewport" content="width=device-width">
-
+        <meta property="og:image" content="http://guessmelody.com/img/ogimage.png" />
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
 
@@ -15,9 +16,6 @@
         <script src="js/vendor/jquery_rotate.js"></script>
         <script src="js/musicarr.js"></script>
         <script src="js/melodybox.js"></script>
-        <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
-        <script type="text/javascript">VK.init({apiId: 4664803, onlyWidgets: true});</script>
-
         <style type="text/css">
             body {
                 padding-top: 70px;
@@ -37,12 +35,11 @@
                     <a class="navbar-brand" rel="home" href="http://guessmelody.com/" title="Guess Melody || Угадай мелодию">
                     <img style="max-width:150px; margin-top: -12px;" src="img/logo_small.png"></a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar-contents" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" onclick="alert('Пока ссылки не доделаны')">Как играть?</a></li>
-                        <li><a href="http://vk.com/guessmelodycom">Наш паблик в ВК</a></li>
-                        <li><a href="#" onclick="alert('Пока ссылки не доделаны')">Поддержать проект</a></li>
-                         <li><a href="#" onclick="alert('Пока ссылки не доделаны')">Связаться с нами</a></li>
+                        <li><a href="#" onclick="howtoplay()">Как играть?</a></li>
+                        <li><a href="http://vk.com/guessmelodycom">Страница Вконтакте</a></li>
+                        <li><a href="#" onclick="interesting()">Поддержать проект</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,7 +79,7 @@
                             <a href="#" class="list-group-item text-center answer" id="ans3">-</a>
                             <a href="#" class="list-group-item text-center answer" id="ans4">-</a>
                         </div>
-                        <div id="vk_like" style="display:inline-block; vertical-align:middle; margin:0;"></div>
+                        <div id="vk_like" style=""></div>
                         <button class="btn btn-warning btn-lg" id="new_game" onclick="newGame()"><span class="glyphicon glyphicon-repeat"> </span> Начать заново</button>
                     </div>
                     <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
@@ -111,11 +108,30 @@
                             
                             <div class="modal-body">
 
-                                <p id="wintext"></p>
+                                <p id="wintext" class="text-center"></p>
                             </div>
                             <div class="modal-footer text-center">
-                                <button onclick = "mbox()" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="winbut"></button>
+                                <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="winbut"></button>
                                 <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%; display: none; margin-left: -5px; margin-top: 10px;" id="winbut2">Отмена</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>    
+                <div class="modal fade" id="modal-info" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title" id="infotitle">Правила довольно просты =)</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+
+                                <p id="infotext" class="text-left">Ваша задача - это набрать как можно больше <span class="label label-success">очков</span>. Каждый игровой раунд длится примерно 15 секунд и чем быстрее вы отвечаете - тем больше очков получаете в случае правильного ответа. Количество очков, которые вы получите за ответ уменьшается от 300 до 0 в течение раунда и отображается на зеленом счетчике, сразу над ответами. </br></br> Партия длится до тех пор, пока Вы трижды не ошибетесь, т.е. когда количество <span class="label label-danger">жизней</span> станет равно нулю. </br></br> Жизнь отнимается также и в том случае, когда Вы не дали никакого ответа, а счётчик досчитал от 300 до нуля. </br></br> <span class="label label-info">Синее</span> окошко рядом с количеством очков содержит информацию о количестве угаданных мелодий. </br></br> В блоке "История" справа Вы можете видеть названия игравших композиций и количество полученных за них очков. При желании, можно прослушать любой из отрывков нажав по нему, а повторное нажатие остановит воспроизведение. </p>
+                            </div>
+                            <div class="modal-footer text-center">
+                                <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="infobut">Ясненько</button>
                             </div>
 
                         </div>
@@ -129,11 +145,21 @@
             <!-- Yandex.Metrika informer -->
                        <a href="https://metrika.yandex.ru/stat/?id=27402497&amp;from=informer"
                         target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/27402497/3_0_EDE8ECFF_CDC8CCFF_0_pageviews"
-                        style="width:80px; height:30px; border:0; margin-left:8%;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:27402497,lang:'ru'});return false}catch(e){}" class=""/></a>
+                        style="width:80px; height:31px; border:0; margin-left:8%;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:27402497,lang:'ru'});return false}catch(e){}" class=""/></a>
             <!-- /Yandex.Metrika informer --> 
+            <span id="openstat2370600" style="margin-left:10px;"></span>
         </footer>
     <!-- JS -->
-
+<!--Openstat-->
+<script type="text/javascript">
+var openstat = { counter: 2370600, image: 5081, color: "828282", next: openstat };
+(function(d, t, p) {
+var j = d.createElement(t); j.async = true; j.type = "text/javascript";
+j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
+var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
+})(document, "script", document.location.protocol);
+</script>
+<!--/Openstat-->
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
@@ -169,6 +195,8 @@
     var h=d[g]('body')[0];
     h.appendChild(s);
   }})();</script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
+    <script type="text/javascript">VK.init({apiId: 4664803, onlyWidgets: true});</script>
     <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "mini"});</script>
     <script src="js/bootstrap.js"></script>
     </body>

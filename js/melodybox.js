@@ -24,7 +24,7 @@ function mbox() {                           //старт игры, запуск 
     a = Math.floor(Math.random()*musicArr.length); //случайно выбираем порядковый номер объекта в массиве
     audio.src = 'http://guessmelody.com/'+musicArr[a].file;                   //указываем путь к воспроизводиму файлу; путь является одним из свойств выбраного объекта (песни)
     pts = 300;                                           //значение таймера обратно к 15
-    document.getElementById('start').innerHTML = pts + ' PTS'; //публикуем его
+    document.getElementById('start').innerHTML = pts + ' очков'; //публикуем его
     audio.play();                                           //запуск аудио  
     timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
     answerGen();                                            //генерация ответов
@@ -36,7 +36,7 @@ function timerGo() {                                                //функц
     timerTimeout = setTimeout(function(){
         timerInterval = setInterval(function() {                    //сам таймер
             pts = pts-4;                                                //отнимаем значение секунд
-            document.getElementById('start').innerHTML = pts + ' PTS';  // записываем его
+            document.getElementById('start').innerHTML = pts + ' очков';  // записываем его
             if(pts==0) lose();}, 200);},1500);                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
    };
 
@@ -62,7 +62,7 @@ function answerGen(){                                                       //г
     else {i--;};}                                                           // если число rand таки нашлось в массиве usedTracks то добавляем i++ для повтора
     q = 1 + Math.random()*4;                                                //теперь когда у нас есть 4 точно разных ответа, генерируем число от 1 до 4
     q = q^0;                                                                // чтобы выбрать блок, куда впишем правильный ответ
-    document.getElementById('ans'+q).innerHTML = musicArr[a].song + '!!!!!'; //заменяем данные из выбранного блока на правильный ответ
+    document.getElementById('ans'+q).innerHTML = musicArr[a].song + ''; //заменяем данные из выбранного блока на правильный ответ
     document.getElementById('ans'+q).onclick = function() {win();};         //задаем клику на такой ответ функцию победы в раунде
 
 }
@@ -76,7 +76,7 @@ function win(){                                                             // �
     document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
-    $('#winbut').onclick = function() {mbox()};
+    document.getElementById('winbut').onclick = function() {mbox()};
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
     document.getElementById('winbut2').style.display = 'none';
     $('#modal-test').modal('show');
@@ -162,4 +162,6 @@ function newGame() {
     $('#modal-test').modal('show');
 }
 
-
+function howtoplay() {
+    $('#modal-info').modal('show');
+}

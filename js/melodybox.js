@@ -75,10 +75,11 @@ function win(){                                                             // �
     document.getElementById('points').innerHTML = points + '  очков';           //опубликуем очки
     document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('wintitle').innerHTML = 'Угадали!';
+    $('.modal-header').css('background-color','#8ce58c');
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
     document.getElementById('winbut').onclick = function() {mbox()};
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
-    document.getElementById('winbut2').style.display = 'none';
+    document.getElementById('winbut2').style.display = 'none'; 
     $('#modal-test').modal('show');
 }
 
@@ -86,10 +87,11 @@ function lose(){                                                            //п
     mstop();                                                                //остановим  музыку
     lifes = lifes-1;                                                                //отнимем 1 жизнь
     historyadd(0,'danger');
+    $('.modal-header').css('background-color','#ff837f');
     document.getElementById('lifes').innerHTML = lifes + '  жизни';            //опубликуем жизни
     if (lifes>0){                                                               //если жизни еще есть - 
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
-        document.getElementById('wintext').innerHTML = 'Жаль... \n Правильный ответ: \n' + musicArr[a].song;
+        document.getElementById('wintext').innerHTML = 'Жаль... <br> Правильный ответ: \n' + musicArr[a].song;
         document.getElementById('winbut').innerHTML = 'Следующий трэк!';
         document.getElementById('winbut').onclick = function() {mbox();};
         document.getElementById('winbut2').style.display = 'none';
@@ -101,6 +103,8 @@ function lose(){                                                            //п
         document.getElementById('guessed').innerHTML = guessed;
         document.getElementById('wintitle').innerHTML = 'Игра окончена!';
         document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен!';
+        document.getElementById('vk_share_button').style.display = 'block';
+        document.getElementById('vk_share_button').innerHTML = VK.Share.button({url:'http://guessmelody.com', title:'Угадай мелодию! Мой результат: ' + points + ' очков!', description:'Я набрал ' + points + ' очков, угадав ' + guessed + ' мелодий. Попробуйте набрать больше! =)', image:'http://guessmelody.com/img/ogimage.png', noparse:true}, {type:'round',text:'Поделиться'});
         document.getElementById('winbut').innerHTML = 'Закончить';
         document.getElementById('winbut').onclick = function() {resetgame();};
         document.getElementById('winbut2').style.display = 'none';
@@ -111,6 +115,7 @@ function lose(){                                                            //п
 function resetgame() {
     mstop();
     lifes = 3; points = 0; pts = 300; guessed = 0;
+    $('.modal-header').css('background-color','#ffffff');
     document.getElementById('points').innerHTML = points + ' очков';
     document.getElementById('lifes').innerHTML = lifes + ' жизни';
     document.getElementById('guessed').innerHTML = guessed;
@@ -118,6 +123,7 @@ function resetgame() {
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
     for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};
     document.getElementById('winbut').onclick = function() {mbox();};
+    document.getElementById('vk_share_button').style.display='none';
     document.getElementById('vk_like').style.display = 'none';
     
 }
@@ -125,7 +131,7 @@ function resetgame() {
 function historyadd(ptsHis,labelstyle) {
     var curTrackFile = musicArr[a].file;
     var curTrackSong = musicArr[a].song;
-    $('<a href="#hist1" onclick="playHis(id)" class="list-group-item text-left" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
+    $('<a href="#hist1" onclick="playHis(id)" class="list-group-item text-left historyitem" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
 }
 
 function playHis(track) {
@@ -138,6 +144,13 @@ function playHis(track) {
     audioHis.src = 'http://guessmelody.com/' + track;
     audioHis.play();
     itemrotate(0,-4)}
+}
+
+function clearHis() {
+    $('.historyitem').remove();
+    itemstoprotate();
+    audioHis.pause();
+    audioHis.src='';
 }
 
 function muteAudio() {
@@ -164,4 +177,12 @@ function newGame() {
 
 function howtoplay() {
     $('#modal-info').modal('show');
+}
+
+function aboutsite() {
+    $('#modal-site').modal('show');
+}
+
+function resultgen() {
+
 }

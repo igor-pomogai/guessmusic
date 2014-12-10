@@ -183,6 +183,14 @@ function aboutsite() {
     $('#modal-site').modal('show');
 }
 
+function supportpj() {
+     $('#modal-supportpj').modal('show');
+}
+
+function contacts() {
+     $('#modal-contacts').modal('show');
+}
+
 function resultgen() {
 
 }

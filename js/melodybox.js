@@ -1,110 +1,111 @@
-var audio = new Audio(); //аудио
-var audioHis = new Audio();// аудио из истории
-var a;                  //глобальная переменная, которая обозначает нужный элемент из массива с треками  
-var points=0;                // очки
-var lifes=3;                //жизни
-var guessed = 0;            //угаданные
-var pts = 300;           //секунды
+var audio = new Audio(); 
+var audioHis = new Audio();
+var a;                 
+var points=0;               
+var lifes=3;                
+var guessed = 0;            
+var pts = 300;           
 var timerInterval=0;
+var resultname = '';
+var resultdescrip = '';
 
-
-function itemrotate(angle, deg){            // функция вращения бобин, (начальный градус угла, на какой угол смещать)
-    rotateInterval = setInterval(function(){    //задаём частоту 
+function itemrotate(angle, deg){            
+    rotateInterval = setInterval(function(){    
     angle+=deg;
-    jQuery(".rotateimg").rotate({animateTo:angle}); //используем команду из плагина jquery.rotate для поворота на нужный угол
+    jQuery(".rotateimg").rotate({animateTo:angle}); 
     },70);
     }
 
-function itemstoprotate(){                      //функция оставноки бобин и возврата в начальное положение
-    clearInterval(rotateInterval);              // очищаем заданую ранее частоту (в функции itemrotate)
-    jQuery(".rotateimg").rotate({animateTo:0}); // используем команду из плагина jquery.rotate чтобы повернуть бобину в исходное положение "0"
+function itemstoprotate(){                      
+    clearInterval(rotateInterval);              
+    jQuery(".rotateimg").rotate({animateTo:0}); 
 }
 
-function mbox() {                           //старт игры, запуск песни
-    a = Math.floor(Math.random()*musicArr.length); //случайно выбираем порядковый номер объекта в массиве
-    audio.src = 'http://guessmelody.com/'+musicArr[a].file;                   //указываем путь к воспроизводиму файлу; путь является одним из свойств выбраного объекта (песни)
-    pts = 300;                                           //значение таймера обратно к 15
-    document.getElementById('start').innerHTML = pts + ' очков'; //публикуем его
-    audio.play();                                           //запуск аудио  
-    timerGo();                                              //запуск таймера, который будет ожидать непосредственно начала проигрывания музыки                                        
-    answerGen();                                            //генерация ответов
+function mbox() {                           
+    a = Math.floor(Math.random()*musicArr.length); 
+    audio.src = 'http://guessmelody.com/'+musicArr[a].file;                  
+    pts = 300;                                           
+    document.getElementById('start').innerHTML = pts + ' очков'; 
+    audio.play();                                            
+    timerGo();                                                                                      
+    answerGen();                                            
     itemrotate(0, -4);   console.log('bobinki');
     $('#start').attr('onclick','');
     }
             
-function timerGo() {                                                //функция запуска таймера
+function timerGo() {                                                
     timerTimeout = setTimeout(function(){
-        timerInterval = setInterval(function() {                    //сам таймер
-            pts = pts-4;                                                //отнимаем значение секунд
-            document.getElementById('start').innerHTML = pts + ' очков';  // записываем его
-            if(pts==0) lose();}, 200);},1500);                                // если значение секунд дошло до нуля вызываем функцию проигрыша раунда
-   };
+        timerInterval = setInterval(function() {                    
+            pts = pts-4;                                                
+            document.getElementById('start').innerHTML = pts + ' очков';  
+            if(pts===0) lose();}, 200);},1500);                                
+   }
 
 
-function mstop() {                                                  //остановка музыки
-    audio.pause();                                                  //пауза
+function mstop() {                                                  
+    audio.pause();                                                  
     clearTimeout(timerTimeout);
     clearInterval(timerInterval);
-    itemstoprotate();                                               //остановили бобины и открутили на 0
+    itemstoprotate();                                               
     $('#start').attr('onclick','mbox()');
     }
 
-function answerGen(){                                                       //генерация ответов
-    var usedTracks = [];                                                    //массив с номерами треков, которые уже опубликованы в ответах
-    usedTracks.push(a);                                                     //туда же вносим значение использующегося трека
-    for (i=1; i<5; i++){                                                     // запускаем цикл, рассчитанный на 4 повторения
-        rand = Math.floor(Math.random()*musicArr.length);                   //генерируем случайное число rand в пределах длины основного массива с треками
-        if (usedTracks.indexOf(rand) == -1) {                               //если этого числа еще нет в массиве usedTracks то
-        usedTracks.push(rand);                                              // вносим его туда и
-        document.getElementById('ans'+i).innerHTML = musicArr[rand].song;  //записываем в блок с идентификатором
-            // из трех букв "ans" и цифрой в конце = i значение автора и названия песни, находящейся под индексом = rand в основном массиве
-        document.getElementById('ans'+i).onclick = function() {lose()};}    //задаем клику по ответу вызов функции проигрыша раунда
-    else {i--;};}                                                           // если число rand таки нашлось в массиве usedTracks то добавляем i++ для повтора
-    q = 1 + Math.random()*4;                                                //теперь когда у нас есть 4 точно разных ответа, генерируем число от 1 до 4
-    q = q^0;                                                                // чтобы выбрать блок, куда впишем правильный ответ
-    document.getElementById('ans'+q).innerHTML = musicArr[a].song + ''; //заменяем данные из выбранного блока на правильный ответ
-    document.getElementById('ans'+q).onclick = function() {win();};         //задаем клику на такой ответ функцию победы в раунде
+function answerGen(){                                                       
+    var usedTracks = [];                                                    
+    usedTracks.push(a);                                                     
+    for (i=1; i<5; i++){                                                     
+        rand = Math.floor(Math.random()*musicArr.length);                   
+        if (usedTracks.indexOf(rand) == -1) {                               
+        usedTracks.push(rand);                                              
+        document.getElementById('ans'+i).innerHTML = musicArr[rand].song;  
+        document.getElementById('ans'+i).onclick = function() {lose();};}    
+    else {i--;}}                                                           
+    q = 1 + Math.random()*4;                                                
+    q = q^0;                                                                
+    document.getElementById('ans'+q).innerHTML = musicArr[a].song + ''; 
+    document.getElementById('ans'+q).onclick = function() {win();};         
 
 }
 
-function win(){                                                             // функция победы в раунде
-    mstop();                                                                //остановим музыку и бобины                                   
-    points = points+pts;                                                               //добавим + к очкам
+function win(){                                                             
+    mstop();                                                                                                 
+    points = points+pts;                                                               
     guessed = guessed+1;
     historyadd(pts,'success');
-    document.getElementById('points').innerHTML = points + '  очков';           //опубликуем очки
+    document.getElementById('points').innerHTML = points + '  очков';           
     document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('wintitle').innerHTML = 'Угадали!';
     $('.modal-header').css('background-color','#8ce58c');
     document.getElementById('wintext').innerHTML = 'Вы угадали и набрали <span class="label label-warning">' + pts + '</span> очков за этот трэк! \n В сумме у Вас <span class="label label-success">' + points + '</span> очков!';
-    document.getElementById('winbut').onclick = function() {mbox()};
+    document.getElementById('winbut').onclick = function() {mbox();};
     document.getElementById('winbut').innerHTML = 'Следующий трэк!';
     document.getElementById('winbut2').style.display = 'none'; 
     $('#modal-test').modal('show');
 }
 
-function lose(){                                                            //проигрыш раунда
-    mstop();                                                                //остановим  музыку
-    lifes = lifes-1;                                                                //отнимем 1 жизнь
+function lose(){                                                            
+    mstop();                                                                
+    lifes = lifes-1;                                                                
     historyadd(0,'danger');
     $('.modal-header').css('background-color','#ff837f');
-    document.getElementById('lifes').innerHTML = lifes + '  жизни';            //опубликуем жизни
-    if (lifes>0){                                                               //если жизни еще есть - 
+    document.getElementById('lifes').innerHTML = lifes + '  жизни';            
+    if (lifes>0){                                                              
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
-        document.getElementById('wintext').innerHTML = 'Жаль... <br> Правильный ответ: \n' + musicArr[a].song;
+        document.getElementById('wintext').innerHTML = 'Не-а,  Правильный ответ: <br><br>' + musicArr[a].song;
         document.getElementById('winbut').innerHTML = 'Следующий трэк!';
         document.getElementById('winbut').onclick = function() {mbox();};
         document.getElementById('winbut2').style.display = 'none';
         $('#modal-test').modal('show');
     }
-    else {                                                                  //если жизни закончили, то оповестим игрока о результатах
+    else {                                                             
+        resultgen();
         document.getElementById('points').innerHTML = points + ' очков';
         document.getElementById('lifes').innerHTML = lifes + ' жизни';
         document.getElementById('guessed').innerHTML = guessed;
         document.getElementById('wintitle').innerHTML = 'Игра окончена!';
-        document.getElementById('wintext').innerHTML = 'Конец. Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен!';
+        document.getElementById('wintext').innerHTML = 'Ваш результат: <b>'+resultname+'</b> <br> Вы набрали <span class="label label-success">' + points + '</span> очков, угадав <span class="label label-info">' + guessed + '</span> песен! <br><br> Поделитесь результатом на своей стене Вконтакте, сделайте вызов друзьям:';
         document.getElementById('vk_share_button').style.display = 'block';
-        document.getElementById('vk_share_button').innerHTML = VK.Share.button({url:'http://guessmelody.com', title:'Угадай мелодию! Мой результат: ' + points + ' очков!', description:'Я набрал ' + points + ' очков, угадав ' + guessed + ' мелодий. Попробуйте набрать больше! =)', image:'http://guessmelody.com/img/ogimage.png', noparse:true}, {type:'round',text:'Поделиться'});
+        document.getElementById('vk_share_button').innerHTML = VK.Share.button({url:'http://guessmelody.com', title:'Угадай мелодию! Мой результат: ' + resultname , description: resultdescrip, image:'http://guessmelody.com/img/ogimage.png', noparse:true}, {type:'round',text:'Поделиться'});
         document.getElementById('winbut').innerHTML = 'Закончить';
         document.getElementById('winbut').onclick = function() {resetgame();};
         document.getElementById('winbut2').style.display = 'none';
@@ -121,7 +122,7 @@ function resetgame() {
     document.getElementById('guessed').innerHTML = guessed;
     document.getElementById('start').onclick = function() {mbox();};
     document.getElementById('start').innerHTML = '<span class="glyphicon glyphicon-play-circle"></span> PLAY';
-    for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';};
+    for (i=1; i<5; i++){document.getElementById('ans'+i).innerHTML="-"; document.getElementById('ans'+i).onclick = '';}
     document.getElementById('winbut').onclick = function() {mbox();};
     document.getElementById('vk_share_button').style.display='none';
     document.getElementById('vk_like').style.display = 'none';
@@ -143,7 +144,7 @@ function playHis(track) {
     audioHis.pause();
     audioHis.src = 'http://guessmelody.com/' + track;
     audioHis.play();
-    itemrotate(0,-4)}
+    itemrotate(0,-4);}
 }
 
 function clearHis() {
@@ -154,7 +155,7 @@ function clearHis() {
 }
 
 function muteAudio() {
-    if(audio.muted==true){
+    if(audio.muted===true){
         audio.muted=false;
         $('#mutespan').removeClass('glyphicon-volume-up');
         $('#mutespan').addClass('glyphicon-volume-off');
@@ -192,5 +193,29 @@ function contacts() {
 }
 
 function resultgen() {
-
+    resultname = '';
+    if (points <= 300){
+        resultname='Целеустремленный';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Маловато, но главное - потенциал! Кто наберет больше?';
+    }
+    else if(points > 300 && points <= 700){
+        resultname='Любитель';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод . Не плохой результат, но стоит еще постараться. Кто наберет больше?';
+    }
+    else if(points > 700 && points <= 1100){
+        resultname='Меломан';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод . Хороший результат. Сразу видно, что человек с музыкой дружит. Кто наберет больше? ';
+    }
+    else if(points > 1100 && points <= 1700){
+        resultname='Знаток';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод . Отличный результат! С музыкой на "ты", такие люди спят, наверное, в наушниках. Кто наберет больше? ';
+    }
+    else if(points > 1700 && points <= 2600){
+        resultname='Профессионал';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод . Просто замечательный результат. Уже можно открывать платную консультацию =). Кто наберет больше?';
+    }
+    else if(points > 2600){
+        resultname='Читер 80 уровня';
+        resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод . Невероятный результат! Это точно не каждому дано! Кто попробует повторить? =) ';
+    }
 }

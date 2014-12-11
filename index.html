@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="webmoney" content="932E5F45-75FB-4D00-8F9A-524410D6FD33"/>
         <meta name="openstat-verification" content="4b2187e355bb97c32ea1fb3d7ae90aab768d5b27" />
+        <meta name='wmail-verification' content='e6d981641b122d99' />
         <title>Угадай мелодию! Играйте онлайн!</title>
         <meta name="description" content="Игра Угадай Мелодию онлайн! Отгадывай музыку, получай очки и делись результатом с друзьями!">
         <meta name="keywords" content="угадай мелодию, отгадай мелодию, угадывать музыку, угадывать песни онлайн, ебз регистрации">
@@ -15,8 +16,8 @@
         <script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
         <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script src="js/vendor/jquery_rotate.js"></script>
-        <script src="js/musicarr.js"></script>
-        <script src="js/melodybox.js"></script>
+        <script src="js/musar.js"></script>
+        <script src="js/mldbox.js"></script>
         <style type="text/css">
             body {
                 padding-top: 70px;
@@ -59,7 +60,7 @@
             <div class="row text-center">
 
                 <div class="col-lg-1 col-md-1 hidden-xs hidden-sm">
-                    <div class="pluso" data-background="transparent" data-options="big,square,line,vertical,counter,theme=07" data-services="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
+                    <div class="pluso" data-background="transparent" data-options="big,square,line,vertical,counter,theme=07" data-services="vkontakte,facebook,twitter,odnoklassniki,moimir,yazakladki"></div>
                 </div>
                     
                 <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
@@ -91,7 +92,7 @@
                         <button class="btn btn-warning btn-lg" id="new_game" onclick="newGame()"><span class="glyphicon glyphicon-repeat"> </span> Начать заново</button>
                     </div>
                     <!-- <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal-test">Open modal window</button> -->
-                    <div class="pluso visible-sm hidden-lg hidden-md hidden-xs" data-background="transparent" data-options="medium,square,line,horizontal,counter,theme=07" data-services="vkontakte,facebook,twitter,odnoklassniki,moimir" style="display:inline-block; text-align:center;"></div>
+                    <div class="pluso visible-sm hidden-lg hidden-md hidden-xs" data-background="transparent" data-options="medium,square,line,horizontal,counter,theme=07" data-services="vkontakte,facebook,twitter,odnoklassniki,moimir,yazakladki" style="display:inline-block; text-align:center;"></div>
 
                 </div>
 
@@ -152,12 +153,12 @@
                         <div class="modal-content">
                             <div class="modal-header">
 
-                                <h4 class="modal-title" id="sitetitle">О Сайте и Авторах</h4>
+                                <h4 class="modal-title" id="sitetitle">Информация о сайте</h4>
                             </div>
                             
                             <div class="modal-body">
 
-                                <p id="sitetext" class="text-left"></p>
+                                <p id="sitetext" class="text-left">Версия игры: 1.0 <br><br> Администрация сайта ни в коем случае не претендует на авторство музыкальных композиций, отрезки которых используются в игре. Все аудиозаписи на сайте цитируются <b>сугубо</b> в ознакомительно-информационных целях. <br><br>Автор игры: Tamango <br> Автор софта для создания базы мелодий: Dayaram <br> Спасибо, Mushtat, за поддержку.</p>
                             </div>
                             <div class="modal-footer text-center">
                                 <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="sitebut">Ясненько</button>
@@ -176,7 +177,7 @@
                             
                             <div class="modal-body">
 
-                                <p id="sitetext" class="text-left"></p>
+                                <p id="sitetext" class="text-left">Самое ценное, что Вы можете сделать для нас - это помогать поддерживать популярность сайта: <br> - рассказывайте о нас друзьям <br> - жмите кнопки социальных сетей <br> - подпишитесь на наш <a href="http://vk.com/guessmelodycom" target="_blank">паблик</a> Вконтакте <br> - оставляйте комментарии и отзывы, делайте репосты <br> - Если же Вы просто хотите поблагодарить авторов, то можете воспользоваться кнопкой ниже: </p>
                                 <form action="https://advisor.wmtransfer.com/Spasibo.aspx" method="post" 
                                 target="_blank" title="Передать $пасибо! нашему сайту">
                                 <input type="hidden" name="url" value=""/><!-- укажите в value адрес Вашего сайта -->
@@ -200,12 +201,7 @@
                             
                             <div class="modal-body">
 
-                                <p id="sitetext" class="text-left"></p>
-                                <form action="https://advisor.wmtransfer.com/Spasibo.aspx" method="post" 
-                                target="_blank" title="Передать $пасибо! нашему сайту">
-                                <input type="hidden" name="url" value=""/><!-- укажите в value адрес Вашего сайта -->
-                                <input type="image" src="//advisor.wmtransfer.com/img/Spasibo!.png" border="0" name="submit"/>
-                                </form>
+                                <p id="sitetext" class="text-center">По любым вопросам Вы можете писать нам на <a href="mailto:vlad@htmlbook.ru">почту</a>: <br><br> admin@guessmelody.com <br> Ни одно письмо не окажется без ответа. <br><br> Также, вы всегда можете оставить комментарий или сообщений на нашей странице <a href="http://vk.com/guessmelodycom">Вконтакте.</a></p>
                             </div>
                             <div class="modal-footer text-center">
                                 <button onclick = "" class="btn btn-default" type="button" data-dismiss="modal" style="width: 100%" id="contactsbut">Ясненько</button>

@@ -16,8 +16,8 @@
         <script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
         <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script src="js/vendor/jquery_rotate.js"></script>
-        <script src="js/musar.js"></script>
-        <script src="js/mldbox.js"></script>
+        <script src="js/musicarr.js"></script>
+        <script src="js/melodybox.js"></script>
         <style type="text/css">
             body {
                 padding-top: 70px;
@@ -81,7 +81,7 @@
                         <!-- <div style="display: inline-block;"><h3 style="margin:0;"><span class="label label-warning" id="timer">300 PTS</span></h3></div>-->
                         </div>
                         </div>
-                        <p class="text-center" style="font-weight:bold;">Ответы:</p>
+                        <p id="ans_caption" class="text-center" style="font-weight:bold;">Ответы:</p>
                         <div id="answers" class="list-group">
                             <a href="#" class="list-group-item text-center answer" id="ans1">-</a>
                             <a href="#" class="list-group-item text-center answer" id="ans2">-</a>
@@ -220,10 +220,18 @@
                         target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/27402497/3_0_EDE8ECFF_CDC8CCFF_0_pageviews"
                         style="width:80px; height:31px; border:0; margin-left:8%;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:27402497,lang:'ru'});return false}catch(e){}" class=""/></a>
             <!-- /Yandex.Metrika informer --> 
-            <span id="openstat2370600" style="margin-left:10px;"></span>
+            <span id="openstat2370600" ></span>
+            <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?3071344"></script>
+            <noscript>
+            <a href="http://top100.rambler.ru/navi/3071344/" style="">
+            <img src="http://counter.rambler.ru/top100.cnt?3071344" alt="Rambler's Top100" border="0" />
+            </a>
+
+            </noscript>
             <span id="authors" ><a href="http://vk.com/id9462184" target="_blank">Tamango</a> & <a href="http://vk.com/id9938519" target="_blank">Dayaram</a> - 2014 ©</span>
         </footer>
     <!-- JS -->
+	<script>choseCategory()</script>
 <!--Openstat-->
 <script type="text/javascript">
 var openstat = { counter: 2370600, image: 5081, color: "828282", next: openstat };

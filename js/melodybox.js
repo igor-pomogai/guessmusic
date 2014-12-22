@@ -1,5 +1,6 @@
 var audio = new Audio(); 
 var audioHis = new Audio();
+var musicCategory;
 var a;                 
 var points=0;               
 var lifes=3;                
@@ -8,6 +9,7 @@ var pts = 300;
 var timerInterval=0;
 var resultname = '';
 var resultdescrip = '';
+var zulu;
 
 function itemrotate(angle, deg){            
     rotateInterval = setInterval(function(){    
@@ -21,9 +23,29 @@ function itemstoprotate(){
     jQuery(".rotateimg").rotate({animateTo:0}); 
 }
 
+function choseCategory() {
+	document.getElementById('start').style.visibility = 'hidden';
+	document.getElementById('ans_caption').innerHTML = 'Выберите категорию музыки:';
+	for (i=1; i<5; i++){
+	document.getElementById('ans'+i).innerHTML="" + arrNames[i-1].name;
+	document.getElementById('ans'+i).onclick = function() {
+		for(n=0;n<arrNames.length;n++){
+			if(this.innerHTML == arrNames[n].name && this.innerHTML != '-'){
+				zulu = arrNames[n].zulu;
+				musicCategory = window[arrNames[n].arr];
+				$('.answer').removeClass('active');
+				$(this).addClass('active');
+				document.getElementById('start').style.visibility = 'visible';
+				document.getElementById('ans_caption').innerHTML = 'Нажмите кнопку выше чтобы начать';
+			}
+		}
+	};
+	}
+}
+
 function mbox() {                           
-    a = Math.floor(Math.random()*musicArr.length); 
-    audio.src = 'http://guessmelody.com/'+musicArr[a].file;                  
+    a = Math.floor(Math.random()*musicCategory.length); 
+    audio.src = 'http://guessmelody.com/'+musicCategory[a].file;                  
     pts = 300;                                           
     document.getElementById('start').innerHTML = pts + ' очков'; 
     audio.play();                                            
@@ -31,6 +53,8 @@ function mbox() {
     answerGen();                                            
     itemrotate(0, -4);   console.log('bobinki');
     $('#start').attr('onclick','');
+	$('.answer').removeClass('active');
+	document.getElementById('ans_caption').innerHTML = 'Ответы:';
     }
             
 function timerGo() {                                                
@@ -54,15 +78,15 @@ function answerGen(){
     var usedTracks = [];                                                    
     usedTracks.push(a);                                                     
     for (i=1; i<5; i++){                                                     
-        rand = Math.floor(Math.random()*musicArr.length);                   
+        rand = Math.floor(Math.random()*musicCategory.length);                   
         if (usedTracks.indexOf(rand) == -1) {                               
         usedTracks.push(rand);                                              
-        document.getElementById('ans'+i).innerHTML = musicArr[rand].song;  
+        document.getElementById('ans'+i).innerHTML = musicCategory[rand].song;  
         document.getElementById('ans'+i).onclick = function() {lose();};}    
     else {i--;}}                                                           
     q = 1 + Math.random()*4;                                                
     q = q^0;                                                                
-    document.getElementById('ans'+q).innerHTML = musicArr[a].song + ''; 
+    document.getElementById('ans'+q).innerHTML = musicCategory[a].song + ''; 
     document.getElementById('ans'+q).onclick = function() {win();};         
 
 }
@@ -91,7 +115,7 @@ function lose(){
     document.getElementById('lifes').innerHTML = lifes + '  жизни';            
     if (lifes>0){                                                              
         document.getElementById('wintitle').innerHTML = 'Не угадали!';
-        document.getElementById('wintext').innerHTML = 'Не-а,  Правильный ответ: <br><br>' + musicArr[a].song;
+        document.getElementById('wintext').innerHTML = 'Не-а,  Правильный ответ: <br><br>' + musicCategory[a].song;
         document.getElementById('winbut').innerHTML = 'Следующий трэк!';
         document.getElementById('winbut').onclick = function() {mbox();};
         document.getElementById('winbut2').style.display = 'none';
@@ -126,12 +150,12 @@ function resetgame() {
     document.getElementById('winbut').onclick = function() {mbox();};
     document.getElementById('vk_share_button').style.display='none';
     document.getElementById('vk_like').style.display = 'none';
-    
+    choseCategory();
 }
 
 function historyadd(ptsHis,labelstyle) {
-    var curTrackFile = musicArr[a].file;
-    var curTrackSong = musicArr[a].song;
+    var curTrackFile = musicCategory[a].file;
+    var curTrackSong = musicCategory[a].song;
     $('<a href="#hist1" onclick="playHis(id)" class="list-group-item text-left historyitem" id="'+curTrackFile+'">'+ '<span class="label label-'+labelstyle+'">' + ptsHis + '</span> ' + curTrackSong + '<span class="glyphicon glyphicon-play-circle"></span></a>').insertAfter("#hist1");
 }
 
@@ -194,27 +218,27 @@ function contacts() {
 
 function resultgen() {
     resultname = '';
-    if (points <= 300){
+    if (points <= 300 + zulu){
         resultname='Целеустремленный: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Кто наберет больше? =)';
     }
-    else if(points > 300 && points <= 700){
+    else if(points > 300+ zulu && points <= 700+ zulu){
         resultname='Любитель: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Кто наберет больше? =)';
     }
-    else if(points > 700 && points <= 1100){
+    else if(points > 700+ zulu && points <= 1100+ zulu){
         resultname='Меломан: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Хороший результат. Кто наберет больше? =) ';
     }
-    else if(points > 1100 && points <= 1700){
+    else if(points > 1100+ zulu && points <= 1700+ zulu){
         resultname='Знаток: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Отличный результат! Кто наберет больше? ';
     }
-    else if(points > 1700 && points <= 2600){
+    else if(points > 1700+ zulu && points <= 2600+ zulu){
         resultname='Профессионал: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Замечательный результат!! Кто наберет больше?';
     }
-    else if(points > 2600){
+    else if(points > 2600+ zulu){
         resultname='Читер 80 уровня: ' + points + ' очков';
         resultdescrip='Набрано ' + points + ' очков, угадано '+guessed+' мелод. Невероятный результат! Кто попробует повторить? =) ';
     }
